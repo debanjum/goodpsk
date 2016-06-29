@@ -1,29 +1,22 @@
 # Varicode class for GoodPSK.
-
 class Varicode:
     """This class implements the PSK31 varicode alphabet."""
 
-    def __init__(self):
-        """Initialization function."""
-    def encode(self,text):
-        """Encodes a string to a string of bits."""
-        out="";
-        for c in text:
-            #print(c);
-            word=self.characters[c]+self.delim;
-            out=out+word;
-            #print("%c -- %s"%(c,word));
-        return out;
-    def decode(self,bits):
-        """Decodes a string of bits to a string of letters."""
-        return "TEST";
+    def encode(self, text):
+        """Encodes a string to a string of varicoded bits."""
+        return self.delim.join([self.characters[ch] for ch in text]) + self.delim
 
-    delim="00";
-    characters={
+    def decode(self, bits):
+        """Decodes a string of bits to a string of letters."""
+        varicode = {value: key for key, value in self.characters.iteritems()}
+        return ''.join([varicode[bit] for bit in bits.split(self.delim) if bit])
+
+    delim = "00"
+    characters = {
         "\n": "11101",
         " ":  "1",
-        
-        #Numbers
+
+        # Numbers
         "0":  "10110111",
         "1":  "10111101",
         "2":  "11101101",
@@ -34,8 +27,8 @@ class Varicode:
         "7":  "110101101",
         "8":  "110101011",
         "9":  "110110111",
-        
-        #Symbols,
+
+        # Symbols
         "'":  "101111111",
         "?":  "1010101111",
         "!":  "111111111",
@@ -64,7 +57,7 @@ class Varicode:
         "[":  "1010101101",
         "]":  "111101111",
 
-        #Lowercase
+        # Lowercase
         "a": "1011",
         "b": "1011111",
         "c": "101111",
@@ -91,8 +84,8 @@ class Varicode:
         "x": "11011111",
         "y": "1011101",
         "z": "111010101",
-        
-        #Uppercase
+
+        # Uppercase
         "A": "1111101",
         "B": "11101011",
         "C": "10101101",
@@ -119,4 +112,4 @@ class Varicode:
         "X": "101110101",
         "Y": "101111011",
         "Z": "1010101101",
-    };
+    }

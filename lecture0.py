@@ -36,7 +36,7 @@ Part 0; or,
 Basics of PSK31
 
 PSK31 consists of phase changes, which is a fancy way of saying that
-the transmitter alternatives between SIN() and COS() waves.  A Zero
+the transmitter alternates between SIN() and COS() waves.  A Zero
 bit is indicated by changing phase, while a One bit is indicated by
 keeping the phase unchanged.  In the classic version, there are 31.25
 symbols per second and only two phases.

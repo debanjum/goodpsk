@@ -6,7 +6,7 @@ import sys;
 def help():
     print("""
 GoodPSK is a quick little tool by Travis Goodspeed, KK4VCZ.  It lets
-you quickly play test patters in PSK31 at varied levels of
+you quickly play test patterns in PSK31 at varied levels of
 abstraction.
 
 At present it does not properly filter artifacts of the phase shift,
