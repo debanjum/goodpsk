@@ -1,3 +1,6 @@
+import struct
+
+
 # Varicode class for GoodPSK.
 class Varicode:
     """This class implements the PSK31 varicode alphabet."""
@@ -10,6 +13,22 @@ class Varicode:
         """Decodes a string of bits to a string of letters."""
         varicode = {value: key for key, value in self.characters.iteritems()}
         return ''.join([varicode[bit] for bit in bits.split(self.delim) if bit])
+
+    def repeat(self, text, count):
+        """returns string with 'text' repeated 'count' times"""
+        return ''.join([text] * count)
+
+    def write(self, text, filename):
+        size = 8  # define size of varicode chunks, 8 for byte
+
+        # convert text to varicode, add 8-bit 0 preamble and 1 postamble
+        varicode = self.repeat('0', size) + self.encode(text) + self.repeat('1', size)
+        varicode += self.repeat('1', len(varicode) % size)  # pad varicode text to whole no. of bytes
+
+        with open(filename, 'wb') as fp:
+            for index in xrange(0, len(varicode), size):            # index for traversal by chunk
+                u8 = ~int(varicode[index:index+size], 2) % 2**size  # convert to unsigned byte and invert
+                fp.write(struct.pack('@B', u8))                     # pack as sytem-endian binary and write to file
 
     delim = "00"
     characters = {

@@ -1,4 +1,10 @@
+# Ignore Testing, Build Files
 *.wav
 *.pyc
 *.log
+*.bin
+
+# Editor Backup Files
 *~
+.\#*
+\#*\#
